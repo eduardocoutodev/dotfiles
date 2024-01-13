@@ -1,0 +1,45 @@
+{
+  "workbench.colorTheme": "Min Dark",
+  "git.autofetch": true,
+  "workbench.iconTheme": "symbols",
+  "symbols.hidesExplorerArrows": false,
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.renderLineHighlight": "gutter",
+  "workbench.editor.labelFormat": "short",
+  "workbench.editor.enablePreview": false,
+  "workbench.sideBar.location": "right",
+  "window.zoomLevel": -1,
+  "terminal.integrated.fontFamily": "JetBrains Mono",
+  "editor.rulers": [80, 120],
+  "editor.stickyScroll.enabled": true,
+  "search.searchOnType": false,
+  "terminal.integrated.defaultProfile.windows": "zsh",
+  "breadcrumbs.enabled": false,
+  "editor.fontLigatures": true,
+  "editor.lineHeight": 1.6,
+  "editor.fontSize": 14,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "explorer.compactFolders": false,
+
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.formatOnType": true
+  },
+
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/tmp": true
+  },
+
+  "git.enableSmartCommit": true,
+  "github.copilot.enable": {
+    "*": true
+  },
+}
+
