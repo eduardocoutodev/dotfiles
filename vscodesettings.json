@@ -9,7 +9,7 @@
   "workbench.editor.enablePreview": false,
   "workbench.sideBar.location": "right",
   "window.zoomLevel": -1,
-  "terminal.integrated.fontFamily": "JetBrains Mono",
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
   "editor.rulers": [80, 120],
   "editor.stickyScroll.enabled": true,
   "search.searchOnType": false,
@@ -21,13 +21,101 @@
   "editor.formatOnPaste": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "explorer.compactFolders": false,
+  "editor.semanticHighlighting.enabled": false,
+  "editor.minimap.enabled": false,
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "workbench.statusBar.visible": false,
+  "window.titleBarStyle": "native",
+  "extensions.ignoreRecommendations": true,
+  "editor.suggestSelection": "first",
+  "window.commandCenter": true,
+  "update.showReleaseNotes": false,
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.cursorStyle": "line",
+  "editor.cursorBlinking": "smooth",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
 
+  "editor.parameterHints.enabled": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.formatOnSave": true,
+
+  "apc.activityBar": {
+    "position": "bottom",
+    "hideSettings": true,
+    "size": 48,
+    "itemMargin": 8,
+    "itemSize": 32
+  },
+
+  "apc.electron": {
+    "titleBarStyle": "hiddenInset",
+    "trafficLightPosition": {
+      "x": 11,
+      "y": 10
+    },
+    "frame": false
+  },
+
+  "apc.header": {
+    "height": 36
+  },
+
+  "apc.listRow": {
+    "height": 24
+  },
+
+  "apc.font.family": "JetBrains Mono",
+  "apc.stylesheet": {
+    ".title-label > h2": "display: none",
+    ".editor-actions": "display: none",
+    ".nosidebar .inline-tabs-placeholder": "width: 75px",
+    ".pane-header": "padding: 0 8px",
+    ".pane-body": "padding: 8px",
+    ".split-view-view:first-child .pane-header": "display: none !important;",
+    ".monaco-list-row": "border-radius: 4px;",
+    ".monaco-workbench .monaco-list:not(.element-focused):focus:before": "display: none;"
+  },
+
+  "cSpell.language": "en,pt",
+
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  "typescript.tsserver.log": "off",
+  "typescript.suggest.autoImports": true,
+
+  // =================== CONFIG: eslint and prettier ===================
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
+
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx"
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact",
+    "javascriptreact": "javascriptreact",
+    "typescriptreact": "typescriptreact"
+  },
 
   "[python]": {
     "editor.defaultFormatter": "ms-python.autopep8",
     "editor.formatOnType": true
+  },
+
+  "files.exclude": {
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/.git": true,
+    ".vscode": true
+    // "node_modules": true
   },
 
   "search.exclude": {
@@ -41,5 +129,7 @@
   "github.copilot.enable": {
     "*": true
   },
+  "explorer.confirmDelete": false,
+  "workbench.settings.applyToAllProfiles": []
 }
 
