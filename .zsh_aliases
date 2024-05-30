@@ -1,0 +1,4 @@
+alias ls='ls --color'
+alias sshpi="ssh -i ~/Credentials/pi_key eduardo@raspberrypi.local"
+alias noti='curl ntfy.sh/eduardo_notifications -d'
+alias z='source ~/.zshrc'
