@@ -10,6 +10,11 @@ if [[ -f "/opt/homebrew/bin/brew" ]] then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# Check if running on Ubuntu
+if [[ "$(uname -s)" == "Linux" && -f /etc/os-release ]]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 # Set the directory for zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -77,7 +82,6 @@ source ~/.zsh_aliases
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-
 
 # pnpm
 export PNPM_HOME="~/Library/pnpm"
