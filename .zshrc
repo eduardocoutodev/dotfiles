@@ -79,6 +79,12 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Source Aliases file 
 source ~/.zsh_aliases
 
+# source Private Aliases
+if [[ -f "~/.private_zsh_aliases" ]] then
+  # If you're using macOS, you'll want this enabled
+  source ~/.private_zsh_aliases
+fi
+
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
