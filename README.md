@@ -42,6 +42,11 @@ brew install stow
 
 ```sh
 brew install bat
+
+```
+### 7. Install delta (Nice tool for git diff) [Check this example](https://twitter.com/rauchg/status/1831101354468897132)
+```sh
+brew install delta
 ```
 
 ## Setup

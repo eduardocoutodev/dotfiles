@@ -3,3 +3,5 @@
 	email = ecouto93@gmail.com
 [credential]
 	helper = store
+[core]
+	pager = delta
