@@ -95,3 +95,15 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export JAVA_HOME=/Users/eduardocouto/.sdkman/candidates/java/current
+
+# Created by `pipx` on 2024-08-21 19:07:48
+export PATH="$PATH:/Users/eduardocouto/.local/bin"
+
+# Export Homebrew to path
+export PATH="/opt/homebrew/bin:$PATH"
