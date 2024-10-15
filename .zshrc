@@ -107,3 +107,9 @@ export PATH="$PATH:/Users/eduardocouto/.local/bin"
 
 # Export Homebrew to path
 export PATH="/opt/homebrew/bin:$PATH"
+
+## Add Global Scripts
+
+chmod +x ~/scripts/*
+
+export PATH="$HOME/scripts:$PATH"
