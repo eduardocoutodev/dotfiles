@@ -57,6 +57,18 @@ brew install delta
 brew install go
 ```
 
+### 9. Install SKHD (Shortcut to apps)
+
+```sh
+brew install koekeishiya/formulae/skhd
+```
+
+#### 10. Start SKHD
+
+```sh
+skhd --start-service
+```
+
 ## Setup
 
 After installing the necessary tools, run the following command to set up your dotfiles:

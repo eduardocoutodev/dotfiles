@@ -1,0 +1,8 @@
+# App shortcuts
+
+# lalt = option key of mac
+
+lalt - c: open -a 'Visual Studio Code'
+lalt - t: open -a 'Terminal'
+lalt - b: open -a 'Opera'
+lalt - i: open -a 'IntelliJ IDEA'
