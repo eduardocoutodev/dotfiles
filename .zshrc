@@ -87,34 +87,6 @@ if [[ -f "~/.private_zsh_aliases" ]] then
   source ~/.private_zsh_aliases
 fi
 
-install_jdk_certificates() {
-  echo "Starting to install jdk certificates"
-  GITHUB_CERT_PATH=/tmp/maven-github.crt
-  ARTIFACTORY_PEM_PATH=/tmp/maven-artifactory.pem
-  [[ ! -f $GITHUB_CERT_PATH ]] && openssl x509 -in <(openssl s_client -connect maven.pkg.github.com:443 -prexit 2>/dev/null) -out $GITHUB_CERT_PATH
-  [[ ! -f $ARTIFACTORY_PEM_PATH ]] && (echo quit | openssl s_client -showcerts -servername artifactory-prd.prd.betfair -connect artifactory-prd.prd.betfair:443 > $ARTIFACTORY_PEM_PATH)
-  sudo keytool -delete -alias dstools -keystore ~/.m2/artifactory-truststore.jks -storepass trustme
-  sudo keytool -import -noprompt -trustcacerts -alias dstools -file $ARTIFACTORY_PEM_PATH -keystore ~/.m2/artifactory-truststore.jks -storepass trustme
-  sudo keytool -delete -alias maven.pkg.github.com -file $ARTIFACTORY_PEM_PATH -keystore ~/.m2/artifactory-truststore.jks -storepass trustme
-  sudo keytool -import -noprompt -trustcacerts -file $GITHUB_CERT_PATH -alias maven.pkg.github.com -keystore ~/.m2/artifactory-truststore.jks -storepass trustme
-  JAVA_VERSION=`java -version 2>&1 | head -1 | cut -d'"' -f2 | sed '/^1\./s///' | cut -d'.' -f1`
-  if (( $JAVA_VERSION >= 9 )); then
-    CACERTS="-cacerts"
-    sudo keytool -importkeystore -noprompt -srckeystore ~/.m2/artifactory-truststore.jks $CACERTS -srcstorepass trustme -deststorepass changeit
-  else
-    # Check where cacerts are located
-    # differs depending or jdk or jre installed
-    if [ -d "$(sdk home java)/jre" ]; then
-    CACERTS="$(sdk home java)/jre"
-    else
-    CACERTS="$(sdk home java)"
-    fi
-    sudo keytool -importkeystore -noprompt -srckeystore ~/.m2/artifactory-truststore.jks -destkeystore $CACERTS/lib/security/cacerts -srcstorepass trustme -deststorepass changeit
-  fi
-}
-
-#install_jdk_certificates
-
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
@@ -130,7 +102,7 @@ esac
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-#export JAVA_HOME=/Users/eduardocouto/.sdkman/candidates/java/current
+export JAVA_HOME=/Users/eduardocouto/.sdkman/candidates/java/current
 
 # Created by `pipx` on 2024-08-21 19:07:48
 export PATH="$PATH:/Users/eduardocouto/.local/bin"
@@ -151,15 +123,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-[ -d /Users/eduardo.couto/.git-flutter/bin ] && export PATH="/Users/eduardo.couto/.git-flutter/bin:$PATH"
-
 # Load go binary
 export PATH="$PATH:/usr/local/go/bin"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$(go env GOPATH)/bin"
 
-# Add podman to path
-#export PATH="$PATH:/opt/podman/bin"
-
-export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
