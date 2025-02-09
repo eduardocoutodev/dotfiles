@@ -1,13 +1,17 @@
 alias ls='ls --color'
-alias sshpi4="ssh -i ~/.ssh/ed25519_rpi4-1 rpi4-1@rpi4-1"
-alias sshpi5='ssh -i ~/Credentials/rpi5-1.key eduardo@rpi5-1'
 alias noti='curl ntfy.sh/eduardo_notifications -d'
-alias z='source ~/.zshrc'
-alias ze='vim ~/.zshrc'
-alias zae='vim ~/.zsh_aliases'
+alias cat='bat'
+
 alias python='python3'
 alias pipi='pip install'
-alias cat='bat'
+
+# Ohzsh
+alias z='source $ZDOTDIR/.zshrc'
+alias ze='vim $ZDOTDIR/.zshrc'
+alias ae='vim $ZDOTDIR/conf.d/07-aliases.zsh'
+alias a='cat $ZDOTDIR/conf.d/07-aliases.zsh'
+
+# Git
 alias gap='git add -p'
 alias gpo='git push origin $(git symbolic-ref --short HEAD)'
 alias gsr='git reset --soft HEAD~1'
@@ -19,7 +23,8 @@ alias gss='git stash save -u'
 alias gsa='git stash apply'
 alias gma='git merge --abort'
 alias gpuo='git pull origin'
-alias a='cat ~/.zsh_aliases'
+
+# Tmux
 alias t='tmux source-file ~/.tmux.conf'
 alias ta='tmux attach -t'
 alias tns='tmux new -s'
