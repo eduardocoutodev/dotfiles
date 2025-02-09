@@ -1,8 +1,18 @@
 # App shortcuts
 
+# Examples: https://github.com/koekeishiya/yabai/blob/master/examples/skhdrc
+
 # lalt = option key of mac
 
 lalt - c: open -a 'Visual Studio Code'
-lalt - t: open -a 'Terminal'
-lalt - b: open -a 'Opera'
+lalt - t: open -a 'iTerm'
+lalt - b: open -a "Firefox Developer Edition" || open -a "Firefox"
 lalt - i: open -a 'IntelliJ IDEA'
+lalt - o: open -a 'Obsidian'
+
+
+# Window manager
+
+# Focus monitor
+cmd - left  : yabai -m display --focus west
+cmd - right : yabai -m display --focus east
