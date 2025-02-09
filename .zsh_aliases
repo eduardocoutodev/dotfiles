@@ -1,5 +1,5 @@
 alias ls='ls --color'
-alias sshpi="ssh -i ~/Credentials/pi_key eduardo@raspberrypi.local"
+alias sshpi4="ssh -i ~/.ssh/ed25519_rpi4-1 rpi4-1@rpi4-1"
 alias noti='curl ntfy.sh/eduardo_notifications -d'
 alias z='source ~/.zshrc'
 alias ze='vim ~/.zshrc'
@@ -25,3 +25,6 @@ alias obb-dcb='docker-compose -f system-tests/docker-compose.yml --profile appli
 alias obb-dcd='docker-compose -f system-tests/docker-compose.yml down -v'
 alias obb-dcu='docker-compose -f system-tests/docker-compose.yml --profile application up -d'
 alias a='cat ~/.zsh_aliases' 
+alias sshpi5='ssh -i ~/Credentials/rpi5-1.key eduardo@rpi5-1'
+alias ta='tmux attach -t'
+alias tns='tmux new -s'

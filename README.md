@@ -63,10 +63,21 @@ brew install go
 brew install koekeishiya/formulae/skhd
 ```
 
-#### 10. Start SKHD
+### 10. Start SKHD
 
 ```sh
 skhd --start-service
+```
+
+### 11. Install yabai
+
+```sh
+brew install koekeishiya/formulae/yabai
+```
+
+### 12. Install neo vim
+```sh
+brew install neovim
 ```
 
 ## Setup

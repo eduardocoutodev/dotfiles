@@ -1,0 +1,141 @@
+@media (prefers-color-scheme: light) {
+  :root {
+    --custom-bg: #f0f0f0;
+    --text-color: #2a2a2a;
+    --url-bg: rgba(255, 255, 255, 0.8);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --custom-bg: #2a2a2a;
+    --text-color: #f0f0f0;
+    --url-bg: rgba(0, 0, 0, 0.8);
+  }
+}
+
+html {
+  --custom-bg: var(--custom-bg);
+}
+
+body {
+  background: var(--custom-bg) !important;
+  color: var(--text-color) !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #navigator-toolbox {
+  padding-top: 3px;
+  padding-bottom: 4px;
+  background: var(--custom-bg) !important;
+  border-bottom: 0 !important;
+}
+
+#nav-bar {
+  background: var(--custom-bg) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 20px);
+}
+
+#nav-bar > .nav-bar-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-box {
+  background: var(--custom-bg) !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-splitter {
+  border: none !important;
+  background: transparent !important;
+  width: 1px !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #TabsToolbar {
+  visibility: collapse !important;
+}
+
+#TabsToolbar {
+  background: var(--custom-bg) !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) .titlebar-buttonbox-container {
+  position: absolute;
+  right: 0;
+  top: 9px;
+  display: flex;
+  justify-content: center;
+  width: 110px !important;
+}
+
+.titlebar-button {
+  width: 36px !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-header {
+  display: none;
+}
+
+#identity-icon-label {
+  display: none;
+}
+
+#urlbar {
+  left: 50% !important;
+  transform: translateX(-50%);
+  max-width: 960px !important;
+}
+
+#urlbar:not([breakout-extend]) #urlbar-background {
+  background: var(--url-bg) !important;
+}
+
+/* Sidebar transition styles */
+html:not([privatebrowsingmode="temporary"]) #sidebar-box {
+  --uc-sidebar-width: 60px;
+  --uc-sidebar-hover-width: 360px;
+  position: relative;
+  min-width: var(--uc-sidebar-width) !important;
+  width: var(--uc-sidebar-width) !important;
+  max-width: var(--uc-sidebar-width) !important;
+  z-index: 4 !important;
+  transition: all 0.3s ease-in-out;
+}
+
+html:not([privatebrowsingmode="temporary"])
+  #main-window[sizemode="fullscreen"]
+  #sidebar-box {
+  --uc-sidebar-width: 1px;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-splitter {
+  display: none;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar {
+  min-width: var(--uc-sidebar-width) !important;
+  max-width: var(--uc-sidebar-width) !important;
+  transition: all 0.3s ease-in-out !important;
+  color: var(--text-color) !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-box:hover {
+  min-width: var(--uc-sidebar-hover-width) !important;
+  width: var(--uc-sidebar-hover-width) !important;
+  max-width: var(--uc-sidebar-hover-width) !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-box:hover #sidebar {
+  min-width: var(--uc-sidebar-hover-width) !important;
+  max-width: var(--uc-sidebar-hover-width) !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) .sidebar-panel {
+  background-color: transparent !important;
+  color: var(--text-color) !important;
+  transition: all 0.3s ease-in-out !important;
+}
