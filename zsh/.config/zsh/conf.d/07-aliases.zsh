@@ -28,3 +28,12 @@ alias gpuo='git pull origin'
 alias t='tmux source-file ~/.tmux.conf'
 alias ta='tmux attach -t'
 alias tns='tmux new -s'
+
+
+# Aerospace
+alias aero='vim ~/.aerospace.toml'
+
+
+ff() {
+    aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {1}")+abort'
+}

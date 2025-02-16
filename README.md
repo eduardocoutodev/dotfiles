@@ -51,31 +51,21 @@ brew install bat
 brew install delta
 ```
 
-### 8. Install Go Lang
+### 11. Install aerospace
 
 ```sh
-brew install go
+brew install --cask nikitabobko/tap/aerospace
 ```
 
-### 9. Install SKHD (Shortcut to apps)
+### 12. Install Sketchy Bar
 
 ```sh
-brew install koekeishiya/formulae/skhd
-```
-
-### 10. Start SKHD
-
-```sh
-skhd --start-service
-```
-
-### 11. Install yabai
-
-```sh
-brew install koekeishiya/formulae/yabai
+brew tap FelixKratz/formulae
+brew install sketchybar
 ```
 
 ### 12. Install neo vim
+
 ```sh
 brew install neovim
 ```
