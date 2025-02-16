@@ -1,0 +1,158 @@
+
+start-at-login = true
+
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = false
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+after-startup-command = [
+  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
+  'exec-and-forget borders',
+  'exec-and-forget sketchybar',
+]
+
+exec-on-workspace-change = [
+  '/bin/bash',
+  '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+]
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'whatsapp'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'raycast'
+run = 'layout floating'
+
+[mode.main.binding]
+alt-left = 'focus --boundaries-action wrap-around-the-workspace left'
+alt-down = 'focus --boundaries-action wrap-around-the-workspace down'
+alt-up = 'focus --boundaries-action wrap-around-the-workspace up'
+alt-right = 'focus --boundaries-action wrap-around-the-workspace right'
+
+alt-shift-left = 'move left'
+alt-shift-down = 'move down'
+alt-shift-up = 'move up'
+alt-shift-right = 'move right'
+
+# Monitor commands
+alt-ctrl-right = 'focus-monitor right'
+alt-ctrl-left = 'focus-monitor left'
+
+alt-ctrl-shift-right = 'move-node-to-monitor right'
+alt-ctrl-shift-left = 'move-node-to-monitor left'
+
+# Consider using 'join-with' command as a 'split' replacement if you want to enable
+# normalizations
+alt-h = 'split horizontal'
+alt-v = 'split vertical'
+
+alt-f = 'fullscreen'
+
+alt-s = 'layout v_accordion'               # 'layout stacking' in i3
+alt-w = 'layout h_accordion'               # 'layout tabbed' in i3
+alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+
+alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
+
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+
+alt-shift-c = 'reload-config'
+alt-c = '''exec-and-forget open -a 'Visual Studio Code' '''
+alt-i = '''exec-and-forget open -a 'IntelliJ IDEA' '''
+# foralt-s = '''exec-and-forget open -a 'Slack' '''
+alt-t = '''exec-and-forget open -a 'iTerm' '''
+alt-b = '''exec-and-forget open -a 'Firefox Developer Edition' || open -a 'Firefox' '''
+alt-o = '''exec-and-forget open -a 'Obsidian' '''
+
+alt-tab = 'workspace-back-and-forth'
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# Modes
+
+alt-esc = [
+  'exec-and-forget echo "PASSTHROUGH" > /tmp/aerospace_current_mode',
+  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  'mode passthrough',
+]
+alt-r = [
+  'exec-and-forget echo "RESIZE" > /tmp/aerospace_current_mode',
+  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  'mode resize',
+]
+
+[mode.passthrough.binding]
+
+alt-esc = [
+  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
+  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  'mode main',
+] # Alt Esc so I can do operations with opt (for example do @ with alt + 2 or [ with opt and 8)
+
+[mode.resize.binding]
+left = 'resize width -50'
+up = 'resize height +50'
+down = 'resize height -50'
+right = 'resize width +50'
+
+enter = [
+  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
+  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  'mode main',
+]
+esc = [
+  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
+  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  'reload-config',
+  'mode main',
+]
+alt-esc = [
+  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
+  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  'reload-config',
+  'mode main',
+]
+r = [
+  'flatten-workspace-tree',
+  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
+  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  'mode main',
+] # reset layout
+f = [
+  'layout floating tiling',
+  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
+  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  'mode main',
+] # Toggle between floating and tiling layout
+backspace = [
+  'close-all-windows-but-current',
+  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
+  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  'mode main',
+]
+
+[gaps]
+inner.horizontal = 20
+inner.vertical = 20
+outer.left = 20
+outer.bottom = 20
+outer.top = 50
+outer.right = 20      # More space for sketchy-bar
