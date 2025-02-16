@@ -34,7 +34,11 @@ alias c='cd ~/Code'
 
 # Aerospace
 alias aero='vim ~/.aerospace.toml'
+alias aeror='aerospace reload-config'
 
+
+# Sketchybar
+alias sr='sketchybar --reload'
 
 ff() {
     aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {1}")+abort'
