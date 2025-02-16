@@ -28,3 +28,6 @@ alias gpuo='git pull origin'
 alias t='tmux source-file ~/.tmux.conf'
 alias ta='tmux attach -t'
 alias tns='tmux new -s'
+
+# Shortcuts
+alias c='cd ~/Code'
