@@ -1,33 +1,28 @@
 #!/bin/bash
 
-echo "Event received $EVENT WITH $CURRENT_MODE" >> /tmp/sketchybar_debug.log
-echo "Script triggered at $(date)" >> /tmp/sketchybar_debug.log
-
-# Get the current mode from environment variable
-if [ -f /tmp/aerospace_current_mode ]; then
-    CURRENT_MODE=$(cat /tmp/aerospace_current_mode)
-else
-    CURRENT_MODE="MAIN"
-fi
+CURRENT_MODE=$(aerospace list-modes --current)
 
 # Debug logging
 echo "Current Mode: $CURRENT_MODE" >> /tmp/sketchybar_debug.log
 
 # Set colors based on mode
 case $CURRENT_MODE in
-    "MAIN")
-        COLOR=0xff50fa7b
-        ;;
-    "RESIZE")
-        COLOR=0xff8be9fd
-        ;;
-    "PASSTHROUGH")
-        COLOR=0xffA020F0
-        ;;
-    *)
-        COLOR=0xff50fa7b
+    "main")
+        COLOR=0xff9370DB  # Purple (Medium Purple)
         CURRENT_MODE="MAIN"
-        ;;
+    ;;
+    "resize")
+        COLOR=0xff4169E1  # Blue (Royal Blue)
+        CURRENT_MODE="RESIZE"
+    ;;
+    "passthrough")
+        COLOR=0xffFFA500  # Orange
+        CURRENT_MODE="PASSTHROUGH"
+    ;;
+    *)
+        COLOR=0xff9370DB  # Purple (Medium Purple) for default
+        CURRENT_MODE="MAIN"
+    ;;
 esac
 
 # Update sketchybar

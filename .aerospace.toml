@@ -7,7 +7,6 @@ enable-normalization-opposite-orientation-for-nested-containers = false
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 after-startup-command = [
-  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
   'exec-and-forget borders',
   'exec-and-forget sketchybar',
 ]
@@ -89,12 +88,10 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 # Modes
 
 alt-esc = [
-  'exec-and-forget echo "PASSTHROUGH" > /tmp/aerospace_current_mode',
   'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode passthrough',
 ]
 alt-r = [
-  'exec-and-forget echo "RESIZE" > /tmp/aerospace_current_mode',
   'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode resize',
 ]
@@ -102,7 +99,6 @@ alt-r = [
 [mode.passthrough.binding]
 
 alt-esc = [
-  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
   'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode main',
 ] # Alt Esc so I can do operations with opt (for example do @ with alt + 2 or [ with opt and 8)
@@ -114,37 +110,31 @@ down = 'resize height -50'
 right = 'resize width +50'
 
 enter = [
-  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
   'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode main',
 ]
 esc = [
-  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
   'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'reload-config',
   'mode main',
 ]
 alt-esc = [
-  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
   'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'reload-config',
   'mode main',
 ]
 r = [
   'flatten-workspace-tree',
-  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
   'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode main',
 ] # reset layout
 f = [
   'layout floating tiling',
-  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
   'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode main',
 ] # Toggle between floating and tiling layout
 backspace = [
   'close-all-windows-but-current',
-  'exec-and-forget echo "MAIN" > /tmp/aerospace_current_mode',
   'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode main',
 ]

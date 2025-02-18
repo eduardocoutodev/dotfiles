@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+sketchybar --add event aerospace_mode_update
+
 sketchybar --add item aerospace.mode left \
            --set aerospace.mode \
            update_freq=0.5 \
