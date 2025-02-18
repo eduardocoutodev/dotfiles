@@ -51,17 +51,38 @@ brew install bat
 brew install delta
 ```
 
-### 11. Install aerospace
+### 08. Install Borders
+
+```sh
+brew tap FelixKratz/formulae
+brew install borders
+```
+
+### 09. Start Borders
+
+```sh
+brew services start bordersƒ
+```
+
+### 10. Install Sketchy Bar
+
+```sh
+brew tap FelixKratz/formulae
+brew install sketchybar
+brew install --cask font-hack-nerd-font
+brew install --cask sf-symbols
+```
+
+### 12. Install aerospace
 
 ```sh
 brew install --cask nikitabobko/tap/aerospace
 ```
 
-### 12. Install Sketchy Bar
+### 13. Start Sketchybar
 
 ```sh
-brew tap FelixKratz/formulae
-brew install sketchybar
+brew services start sketchybar
 ```
 
 ### 12. Install neo vim
