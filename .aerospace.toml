@@ -43,9 +43,13 @@ alt-shift-right = 'move right'
 # Monitor commands
 alt-ctrl-right = 'focus-monitor right'
 alt-ctrl-left = 'focus-monitor left'
+alt-ctrl-up = 'focus-monitor up'
+alt-ctrl-down = 'focus-monitor down'
 
 alt-ctrl-shift-right = 'move-node-to-monitor right'
 alt-ctrl-shift-left = 'move-node-to-monitor left'
+alt-ctrl-shift-up = 'move-node-to-monitor up'
+alt-ctrl-shift-down = 'move-node-to-monitor down'
 
 # Consider using 'join-with' command as a 'split' replacement if you want to enable
 # normalizations
@@ -54,7 +58,7 @@ alt-v = 'split vertical'
 
 alt-f = 'fullscreen'
 
-alt-s = 'layout v_accordion'               # 'layout stacking' in i3
+# alt-s = 'layout v_accordion'               # 'layout stacking' in i3
 alt-w = 'layout h_accordion'               # 'layout tabbed' in i3
 alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
 
@@ -77,7 +81,7 @@ alt-shift-6 = 'move-node-to-workspace 6'
 alt-shift-c = 'reload-config'
 alt-c = '''exec-and-forget open -a 'Visual Studio Code' '''
 alt-i = '''exec-and-forget open -a 'IntelliJ IDEA' '''
-# foralt-s = '''exec-and-forget open -a 'Slack' '''
+alt-s = '''exec-and-forget open -a 'Slack' '''
 alt-t = '''exec-and-forget open -a 'iTerm' '''
 alt-b = '''exec-and-forget open -a 'Firefox Developer Edition' || open -a 'Firefox' '''
 alt-o = '''exec-and-forget open -a 'Obsidian' '''
