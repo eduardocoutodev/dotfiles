@@ -103,6 +103,11 @@ alt-esc = [
   'mode main',
 ] # Alt Esc so I can do operations with opt (for example do @ with alt + 2 or [ with opt and 8)
 
+esc = [
+  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  'mode main',
+]
+
 [mode.resize.binding]
 left = 'resize width -50'
 up = 'resize height +50'
