@@ -2,9 +2,10 @@
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 ITEM_DIR="$CONFIG_DIR/items"
+HELPER="$CONFIG_DIR/helper"
 
 source "$CONFIG_DIR/colors.sh" # Loads all defined colors
-source "$CONFIG_DIR/icons.sh" # Loads all defined icons
+source "$CONFIG_DIR/icon_map.sh" # Loads all defined icons
 
 ##### Bar Appearance #####
 # Configuring the general appearance of the bar.
@@ -13,53 +14,70 @@ source "$CONFIG_DIR/icons.sh" # Loads all defined icons
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
+
+# (cd $CONFIG_DIR/helper && make)
+# $CONFIG_DIR/helper/helper $HELPER >/dev/null 2>&1 &
+
 FONT="JetBrainsMono Nerd Font"
 
-PADDINGS=3 # All paddings use this value (icon, label, background)
-
-POPUP_BORDER_WIDTH=2
-POPUP_CORNER_RADIUS=11
-
-SHADOW=on
+# PADDINGS=3 # All paddings use this value (icon, label, background)
+# POPUP_BORDER_WIDTH=2
+# POPUP_CORNER_RADIUS=11
+# SHADOW=on
 
 # Setting up the general bar appearance and default values
 sketchybar --bar     height=30                                         \
                      color=$BAR_COLOR                                  \
-                     shadow=$SHADOW                                    \
                      position=top                                    \
-                     sticky=on                                         \
-                     blur_radius=20                                    \
-                                                                       \
-           --default updates=when_shown                                \
-                     icon.font="$FONT:Bold:14.0"                       \
-                     icon.color=$ICON_COLOR                            \
-                     icon.padding_left=$PADDINGS                       \
-                     icon.padding_right=$PADDINGS                      \
-                     label.font="$FONT:Semibold:13.0"                  \
-                     label.color=$LABEL_COLOR                          \
-                     label.padding_left=$PADDINGS                      \
-                     label.padding_right=$PADDINGS                     \
-                     background.padding_right=$PADDINGS                \
-                     background.padding_left=$PADDINGS                 \
-                     popup.background.border_width=2                   \
-                     popup.background.corner_radius=11                 \
-                     popup.background.border_color=$POPUP_BORDER_COLOR \
-                     popup.background.color=$POPUP_BACKGROUND_COLOR    \
-                     popup.background.shadow.drawing=$SHADOW           \
-                     drawing=on                                        \
-                     background.drawing=on                             \ 
-                     updates=when_shown
+                     sticky=off                                         \
+                     blur_radius=30                                    \
+                     padding_left=10                                    \
+                     padding_right=10                                   \
+                                                                       
+
+sketchybar --default icon.font="$FONT:Semibold:15.0"  \
+                     icon.color=$WHITE                 \
+                     label.font="$FONT:Semibold:15.0" \
+                     label.color=$WHITE                \
+                     background.color=$ITEM_BG_COLOR       \
+                     background.corner_radius=5            \
+                     background.height=24                  \
+                     padding_left=5                        \
+                     padding_right=5                       \
+                     label.padding_left=4                  \
+                     label.padding_right=10                \
+                     icon.padding_left=10                  \
+                     icon.padding_right=4
 
 
+###############################################################################
+#                                Left side
+###############################################################################
 
-# Loading items
+# source "$ITEM_DIR/apple.sh"
+source "$ITEM_DIR/aerospace-mode.sh"
+source "$ITEM_DIR/front_app.sh"
+source "$ITEM_DIR/aerospacer.sh"
 
-for item_script in ${ITEM_DIR}/*.sh; do
-  echo "Loaded $item_script"
-  source $item_script
-done
+###############################################################################
+#                                 Center
+###############################################################################
+
+# source "$ITEM_DIR/media.sh"
+
+
+###############################################################################
+#                               Right side
+###############################################################################
+
+source "$ITEM_DIR/clock.sh"
+source "$ITEM_DIR/cpu.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/volume.sh"
 
 ############## FINALIZING THE SETUP ##############
 sketchybar --update
+
+sketchybar --hotload on
 
 echo "sketchybar configuation loaded.."

@@ -70,6 +70,7 @@ brew services start bordersƒ
 brew tap FelixKratz/formulae
 brew install sketchybar
 brew install --cask font-hack-nerd-font
+brew install font-sf-pro
 brew install --cask sf-symbols
 ```
 
