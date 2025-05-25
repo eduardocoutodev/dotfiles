@@ -7,14 +7,6 @@ enable-normalization-opposite-orientation-for-nested-containers = false
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 on-focus-changed = ['move-mouse window-lazy-center']
 
-[workspace-to-monitor-force-assignment]
-    1 = '^built-in retina display$'                           # Monitor sequence number from left to right. 1-based indexing
-    2 = '^built-in retina display$'                       
-    3 = 'DELL U2419H'                  
-    4 = 'DELL U2419H'                   
-    5 = 'DELL U2419H'  
-    6 = ['DELL U2419H']
-
 after-startup-command = [
   'exec-and-forget borders',
   'exec-and-forget sketchybar',
@@ -25,6 +17,15 @@ exec-on-workspace-change = [
   '-c',
   'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
 ]
+
+[workspace-to-monitor-force-assignment]
+    1 = '^built-in retina display$'                           # Monitor sequence number from left to right. 1-based indexing
+    2 = '^built-in retina display$'                       
+    3 = 'DELL U2419H'                  
+    4 = 'DELL U2419H'                   
+    5 = 'DELL U2419H'  
+    6 = ['DELL U2419H']
+
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'finder'
