@@ -1,36 +1,56 @@
 #!/bin/bash
 
-CURRENT_MODE=$(aerospace list-modes --current)
+CURRENT_MODE=$(aerospace list-modes --current 2>/dev/null || echo "main")
 
-# Debug logging
-echo "Current Mode: $CURRENT_MODE" >> /tmp/sketchybar_debug.log
+# Modern color palette
+MAIN_COLOR=0xff8aadf4
+PASSTHROUGH_COLOR=0xffeed49f
+RESIZE_COLOR=0xffa6da95
+UNKNOWN_COLOR=0xffed8796
 
-# Set colors based on mode
-case $CURRENT_MODE in
+case "$CURRENT_MODE" in
     "main")
-        COLOR=0xff9370DB  # Purple (Medium Purple)
-        CURRENT_MODE="MAIN"
-    ;;
-    "resize")
-        COLOR=0xff4169E1  # Blue (Royal Blue)
-        CURRENT_MODE="RESIZE"
-    ;;
+        # Main mode - normal operation
+        sketchybar --set aerospace.mode \
+                         icon="󰧨" \
+                         icon.color=$MAIN_COLOR \
+                         background.color=0x20$8aadf4 \
+                         background.border_color=$MAIN_COLOR \
+                         label="" \
+                         label.drawing=off
+        echo "Set to MAIN mode"
+        ;;
     "passthrough")
-        COLOR=0xffFFA500  # Orange
-        CURRENT_MODE="PASSTHROUGH"
-    ;;
+        # Passthrough mode - aerospace disabled
+        sketchybar --set aerospace.mode \
+                         icon="󰌾" \
+                         icon.color=$PASSTHROUGH_COLOR \
+                         background.color=0x20$eed49f \
+                         background.border_color=$PASSTHROUGH_COLOR \
+                         label="PASS" \
+                         label.drawing=on
+        echo "Set to PASSTHROUGH mode"
+        ;;
+    "resize")
+        # Resize mode - window manipulation
+        sketchybar --set aerospace.mode \
+                         icon="󰩨" \
+                         icon.color=$RESIZE_COLOR \
+                         background.color=0x20$a6da95 \
+                         background.border_color=$RESIZE_COLOR \
+                         label="SIZE" \
+                         label.drawing=on
+        echo "Set to RESIZE mode"
+        ;;
     *)
-        COLOR=0xff9370DB  # Purple (Medium Purple) for default
-        CURRENT_MODE="MAIN"
-    ;;
+        # Unknown or error state
+        sketchybar --set aerospace.mode \
+                         icon="󰀧" \
+                         icon.color=$UNKNOWN_COLOR \
+                         background.color=0x20$ed8796 \
+                         background.border_color=$UNKNOWN_COLOR \
+                         label="???" \
+                         label.drawing=on
+        echo "Unknown mode: $CURRENT_MODE"
+        ;;
 esac
-
-# Update sketchybar
-sketchybar --set aerospace.mode \
-           label="$CURRENT_MODE" \
-           background.color=$COLOR \
-           label.padding_left=10 \
-           label.padding_right=10
-
-# More debug logging
-echo "Updated sketchybar with mode: $CURRENT_MODE and color: $COLOR" >> /tmp/sketchybar_debug.log
