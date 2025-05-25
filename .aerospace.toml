@@ -5,6 +5,15 @@ enable-normalization-flatten-containers = false
 enable-normalization-opposite-orientation-for-nested-containers = false
 
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+on-focus-changed = ['move-mouse window-lazy-center']
+
+[workspace-to-monitor-force-assignment]
+    1 = '^built-in retina display$'                           # Monitor sequence number from left to right. 1-based indexing
+    2 = '^built-in retina display$'                       
+    3 = 'DELL U2419H'                  
+    4 = 'DELL U2419H'                   
+    5 = 'DELL U2419H'  
+    6 = ['DELL U2419H']
 
 after-startup-command = [
   'exec-and-forget borders',
@@ -29,11 +38,33 @@ run = 'layout floating'
 if.app-name-regex-substring = 'raycast'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-name-regex-substring = 'slack'
+run = ['move-node-to-workspace 1']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'iterm2'
+run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefoxdeveloperedition'
+run = ['move-node-to-workspace 3']
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.intellij'
+run = ['move-node-to-workspace 4']
+
 [mode.main.binding]
 alt-left = 'focus --boundaries-action wrap-around-the-workspace left'
 alt-down = 'focus --boundaries-action wrap-around-the-workspace down'
 alt-up = 'focus --boundaries-action wrap-around-the-workspace up'
 alt-right = 'focus --boundaries-action wrap-around-the-workspace right'
+
+alt-shift-w = 'close'
 
 alt-shift-left = 'move left'
 alt-shift-down = 'move down'
@@ -46,10 +77,10 @@ alt-ctrl-left = 'focus-monitor left'
 alt-ctrl-up = 'focus-monitor up'
 alt-ctrl-down = 'focus-monitor down'
 
-alt-ctrl-shift-right = 'move-node-to-monitor right'
-alt-ctrl-shift-left = 'move-node-to-monitor left'
-alt-ctrl-shift-up = 'move-node-to-monitor up'
-alt-ctrl-shift-down = 'move-node-to-monitor down'
+alt-ctrl-shift-right = 'move-node-to-monitor right --focus-follows-window'
+alt-ctrl-shift-left = 'move-node-to-monitor left --focus-follows-window'
+alt-ctrl-shift-up = 'move-node-to-monitor up --focus-follows-window'
+alt-ctrl-shift-down = 'move-node-to-monitor down --focus-follows-window'
 
 # Consider using 'join-with' command as a 'split' replacement if you want to enable
 # normalizations

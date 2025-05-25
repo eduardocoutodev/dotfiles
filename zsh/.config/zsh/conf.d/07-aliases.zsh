@@ -35,7 +35,7 @@ alias c='cd ~/Code'
 # Aerospace
 alias aero='vim ~/.aerospace.toml'
 alias aeror='aerospace reload-config'
-
+alias aerok='ps -A | grep -i "Aerospace" | xargs kill $1'
 
 # Sketchybar
 alias sr='sketchybar --reload'
