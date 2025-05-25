@@ -69,13 +69,14 @@ sketchybar --add item left_separator left \
 #                               Right side
 ###############################################################################
 
-source "$ITEM_DIR/media.sh"
+# source "$ITEM_DIR/media.sh"
 source "$ITEM_DIR/clock.sh"
 source "$ITEM_DIR/cpu.sh"
+source "$ITEM_DIR/wifi.sh"
 source "$ITEM_DIR/battery.sh"
 source "$ITEM_DIR/volume.sh"
 
-sketchybar --add bracket system_info cpu battery volume \
+sketchybar --add bracket system_info wifi cpu battery volume \
            --set system_info background.color=0x15ffffff \
                             background.corner_radius=10 \
                             background.border_width=1 \
