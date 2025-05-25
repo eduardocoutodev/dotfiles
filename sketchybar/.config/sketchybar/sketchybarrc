@@ -1,53 +1,45 @@
-# https://github.com/FelixKratz/dotfiles
-
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 ITEM_DIR="$CONFIG_DIR/items"
 HELPER="$CONFIG_DIR/helper"
-
 source "$CONFIG_DIR/colors.sh" # Loads all defined colors
 source "$CONFIG_DIR/icon_map.sh" # Loads all defined icons
 
-##### Bar Appearance #####
-# Configuring the general appearance of the bar.
-# These are only some of the options available. For all options see:
-# https://felixkratz.github.io/SketchyBar/config/bar
-# If you are looking for other colors, see the color picker:
-# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
-
-
-# (cd $CONFIG_DIR/helper && make)
-# $CONFIG_DIR/helper/helper $HELPER >/dev/null 2>&1 &
-
 FONT="JetBrainsMono Nerd Font"
-
-# PADDINGS=3 # All paddings use this value (icon, label, background)
-# POPUP_BORDER_WIDTH=2
-# POPUP_CORNER_RADIUS=11
-# SHADOW=on
+BAR_HEIGHT=32
+CORNER_RADIUS=12
+PADDING=8
+ICON_PADDING=6
+BLUR_STRENGTH=50
 
 # Setting up the general bar appearance and default values
-sketchybar --bar     height=30                                         \
-                     color=$BAR_COLOR                                  \
-                     position=top                                    \
-                     sticky=off                                         \
-                     blur_radius=30                                    \
-                     padding_left=10                                    \
-                     padding_right=10                                   \
+sketchybar --bar height=$BAR_HEIGHT \
+              position=top \
+              sticky=off \
+              padding_left=0 \
+              padding_right=0 \
+              margin=16 \
+              corner_radius=$CORNER_RADIUS \
+              blur_radius=$BLUR_STRENGTH \
+              color=0x1f000000 \
+              border_width=1 \
+              border_color=0x30ffffff \
+              shadow=on
                                                                        
 
-sketchybar --default icon.font="$FONT:Semibold:15.0"  \
-                     icon.color=$WHITE                 \
-                     label.font="$FONT:Semibold:15.0" \
-                     label.color=$WHITE                \
-                     background.color=$ITEM_BG_COLOR       \
-                     background.corner_radius=5            \
-                     background.height=24                  \
-                     padding_left=5                        \
-                     padding_right=5                       \
-                     label.padding_left=4                  \
-                     label.padding_right=10                \
-                     icon.padding_left=10                  \
-                     icon.padding_right=4
+sketchybar --default icon.font="$FONT:Medium:14.0" \
+                    icon.color=0xffffffff \
+                    icon.padding_left=$ICON_PADDING \
+                    icon.padding_right=$ICON_PADDING \
+                    label.font="$FONT:Medium:13.0" \
+                    label.color=0xffffffff \
+                    label.padding_left=4 \
+                    label.padding_right=$PADDING \
+                    background.color=0x00000000 \
+                    background.corner_radius=8 \
+                    background.height=24 \
+                    background.border_width=0 \
+                    padding_left=6 \
+                    padding_right=6
 
 
 ###############################################################################
@@ -58,6 +50,13 @@ sketchybar --default icon.font="$FONT:Semibold:15.0"  \
 source "$ITEM_DIR/aerospace-mode.sh"
 source "$ITEM_DIR/front_app.sh"
 source "$ITEM_DIR/aerospacer.sh"
+
+sketchybar --add item left_separator left \
+           --set left_separator icon="│" \
+                                icon.color=0x30ffffff \
+                                icon.font="$FONT:Light:16.0" \
+                                background.padding_right=8 \
+                                background.padding_left=8
 
 ###############################################################################
 #                                 Center
@@ -70,10 +69,17 @@ source "$ITEM_DIR/aerospacer.sh"
 #                               Right side
 ###############################################################################
 
+source "$ITEM_DIR/media.sh"
 source "$ITEM_DIR/clock.sh"
 source "$ITEM_DIR/cpu.sh"
 source "$ITEM_DIR/battery.sh"
 source "$ITEM_DIR/volume.sh"
+
+sketchybar --add bracket system_info cpu battery volume \
+           --set system_info background.color=0x15ffffff \
+                            background.corner_radius=10 \
+                            background.border_width=1 \
+                            background.border_color=0x20ffffff
 
 ############## FINALIZING THE SETUP ##############
 sketchybar --update

@@ -204,7 +204,7 @@ function icon_map() {
         icon_result=""  # :google_chrome:
         ;;
    "IntelliJ IDEA")
-        icon_result=""  # :idea:
+        icon_result=""  # :idea:
         ;;
    "Insomnia")
         icon_result="😴"  # :insomnia:
