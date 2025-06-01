@@ -30,3 +30,6 @@ export PNPM_HOME="$HOME/Library/pnpm"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
+
+# Intellij
+export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
