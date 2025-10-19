@@ -31,6 +31,7 @@ alias tns='tmux new -s'
 
 # Shortcuts
 alias c='cd ~/Code'
+alias idea='open -a "IntelliJ IDEA"'
 
 # Aerospace
 alias aero='vim ~/.aerospace.toml'
