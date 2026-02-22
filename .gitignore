@@ -5,3 +5,5 @@ scripts/private
 # Ignore local configurations
 **/zsh/local/*
 !**/zsh/local/**/.gitkeep
+
+.DS_Store

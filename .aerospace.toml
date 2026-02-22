@@ -26,6 +26,11 @@ exec-on-workspace-change = [
     5 = 'DELL U2419H'  
     6 = ['DELL U2419H']
 
+## run aerospace list-apps
+
+[[on-window-detected]]
+if.app-id = 'com.loom.desktop'
+run = ['layout floating']
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'finder'
@@ -44,7 +49,7 @@ if.app-name-regex-substring = 'slack'
 run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'iterm2'
+if.app-name-regex-substring = 'WezTerm'
 run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
@@ -114,7 +119,7 @@ alt-shift-c = 'reload-config'
 alt-c = '''exec-and-forget open -a 'Visual Studio Code' '''
 alt-i = '''exec-and-forget open -a 'IntelliJ IDEA' '''
 alt-s = '''exec-and-forget open -a 'Slack' '''
-alt-t = '''exec-and-forget open -a 'iTerm' '''
+alt-t = '''exec-and-forget open -a 'WezTerm' '''
 alt-b = '''exec-and-forget open -a 'Firefox Developer Edition' || open -a 'Firefox' '''
 alt-o = '''exec-and-forget open -a 'Obsidian' '''
 
