@@ -33,3 +33,6 @@ export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
 
 # Intellij
 export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
+
+# WezTerm
+export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"

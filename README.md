@@ -92,6 +92,12 @@ brew services start sketchybar
 brew install neovim
 ```
 
+### 13. Install WezTerm
+
+```sh
+brew install --cask wezterm
+```
+
 ## Setup
 
 After installing the necessary tools, run the following command to set up your dotfiles:
@@ -100,3 +106,5 @@ After installing the necessary tools, run the following command to set up your d
 cd ~/Dotfiles
 stow .
 ```
+
+This covers all packages including WezTerm — no extra step needed. The WezTerm config will be symlinked to `~/.wezterm.lua`.
