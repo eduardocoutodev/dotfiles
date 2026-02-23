@@ -1,4 +1,5 @@
-alias ls='ls --color'
+alias ls='lsd'
+alias ll='ls -l'
 alias noti='curl ntfy.sh/eduardo_notifications -d'
 alias cat='bat'
 
@@ -18,11 +19,13 @@ alias gsr='git reset --soft HEAD~1'
 alias ghr='git reset --hard HEAD~1'
 alias gfp='git fetch --all --prune'
 alias gca='git commit --amend'
+alias gm='git branch | fzf | xargs git merge'
 alias gs='git stash -u'
 alias gss='git stash save -u'
 alias gsa='git stash apply'
 alias gma='git merge --abort'
 alias gpuo='git pull origin'
+alias gbsw='git branch | fzf | xargs git checkout'
 
 # Tmux
 alias t='tmux source-file ~/.tmux.conf'
