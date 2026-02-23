@@ -56,6 +56,7 @@ setup_environment "$ENV_TYPE"
 # Use stow to create symlinks
 cd "$DOTFILES_DIR"
 stow -R zsh
+stow -R ghostty
 
 # Create environment-specific config if it doesn't exist
 if [ ! -f "$HOME/.config/zsh/local/$ENV_TYPE.zsh" ]; then
