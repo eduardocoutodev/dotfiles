@@ -6,21 +6,21 @@ description: >
   "pick up a ticket", "run Ralph", "start the execution loop", "work on the feature", "build
   this", or after the kanban-generator has produced tickets. Also trigger when the user returns
   to a project and says "continue where we left off", "what's next", or "keep going". This skill
-  reads the ticket board, finds the next unblocked ticket, writes the code, runs tests, and
-  creates a commit — one ticket per session. It relies strictly on the PRD and research.md for
-  context rather than searching the web or guessing.
+  reads the ticket board, finds the next unblocked ticket, writes the code, runs tests, one ticket per session. 
+  It relies strictly on the PRD and research.md for context rather than searching the web or guessing.
 ---
 
 # Execution Loop (Ralph)
 
 The builder. Takes one ticket at a time from the board, writes production-ready code, verifies it
-with tests, and commits the work. This skill is designed to run semi-autonomously — the user kicks
+with tests. This skill is designed to run semi-autonomously — the user kicks
 it off and reviews the output, but the actual coding happens without hand-holding.
 
 ## Why One Ticket at a Time
 
 Building an entire feature in one session leads to compounding errors. A mistake in the database
 schema cascades through every endpoint and every component. By working ticket-by-ticket:
+
 - Each change is small enough to review quickly
 - Errors are caught early before they cascade
 - The user can course-correct between tickets
@@ -31,6 +31,7 @@ schema cascades through every endpoint and every component. By working ticket-by
 ### Step 1: Load Context
 
 Read these files in order:
+
 1. `plan/tickets.json` — The ticket board (machine-readable)
 2. `plan/PRD.md` — The full requirements
 3. `plan/research.md` — Technical research (if it exists)
@@ -41,6 +42,7 @@ stop and tell the user to run the **kanban-generator** skill first.
 ### Step 2: Find the Next Ticket
 
 Scan the ticket board for the next ticket that:
+
 1. Has `status: "todo"` (not "in_progress", "done", or "blocked")
 2. Has all `blocked_by` tickets in `status: "done"`
 3. Is the earliest in the ordering among eligible tickets
@@ -49,6 +51,7 @@ If multiple tickets are eligible, pick the one in the earliest phase (Foundation
 Backend before Integration, etc.).
 
 Present the selected ticket to the user:
+
 - Ticket ID and title
 - What it involves
 - What it depends on (and confirmation those are done)
@@ -60,6 +63,7 @@ If the user has specified a particular ticket, use that instead.
 ### Step 3: Detect the Stack
 
 Check the project for stack-specific patterns:
+
 - **Spring Boot / Kotlin**: Follow existing package structure, use constructor injection,
   follow existing test patterns (JUnit 5 / MockK / etc.)
 - **NestJS / Next.js**: Follow existing module structure, use decorators consistently,
@@ -69,6 +73,7 @@ Check the project for stack-specific patterns:
 ### Step 4: Plan Before Coding
 
 Before writing any code, outline your plan:
+
 1. Which files will be created or modified
 2. What the changes will be at a high level
 3. Which existing patterns you'll follow
@@ -112,6 +117,7 @@ npm run test:e2e
 ```
 
 If tests fail:
+
 1. Read the failure output carefully
 2. Fix the issue
 3. Run tests again
@@ -120,66 +126,20 @@ If tests fail:
 If an existing test (not one you wrote) fails, it might indicate your change broke something.
 Investigate before proceeding.
 
-### Step 7: Commit
-
-Create a focused commit with a descriptive message:
-
-```bash
-git add -A
-git commit -m "[ticket-id]: [concise description]
-
-[Longer description of what was done and why]
-
-Ticket: [ticket-id]
-PRD: plan/PRD.md"
-```
-
-### Step 8: Create a PR (if applicable)
-
-If the project uses a branching strategy:
-
-```bash
-# Create a branch for this ticket if not already on one
-git checkout -b feature/[ticket-id]-[short-description]
-
-# After committing, push and provide PR creation instructions
-git push origin feature/[ticket-id]-[short-description]
-```
-
-Provide the user with a PR title and description:
-```markdown
-**PR Title**: [ticket-id]: [Ticket Title]
-
-**Description**:
-## What
-[What this PR does — 2-3 sentences]
-
-## Why
-[Reference to PRD section]
-
-## How
-[Brief technical approach]
-
-## Testing
-[What tests were added/modified and what they verify]
-
-## Ticket
-[ticket-id] from plan/tickets.md
-```
-
-### Step 9: Update the Board
+### Step 6: Update the Board
 
 Update `plan/tickets.json`:
+
 - Set this ticket's status to `"done"`
 - Note the commit hash and branch name
 - Update any tickets that were blocked only by this one — they may now be unblocked
 
-### Step 10: Report and Recommend
+### Step 7: Report and Recommend
 
 Tell the user:
+
 - What was built
 - What tests pass
-- What the commit/PR contains
 - What the next eligible ticket is
 
 Ask: "Want to review this before I pick up the next ticket?"
@@ -194,7 +154,7 @@ These are non-negotiable safety constraints:
 1. **Run tests before marking complete.** A ticket is not done until tests pass. This includes
    both new tests written for this ticket AND the existing test suite.
 2. **One ticket, one PR.** Each ticket gets its own commit and (if applicable) its own PR.
-   Don't combine tickets into a single change.
+   Don't combine tickets into a single change. The user must commit and push after each ticket before you pick the next one.
 3. **Don't modify files outside ticket scope.** If you notice an issue in unrelated code, note
    it for the user — don't fix it. Scope creep in individual tickets undermines the whole system.
 4. **Never skip error handling.** The PRD has an edge case table. Use it.
