@@ -2,6 +2,48 @@
 const { execSync } = require("child_process");
 const path = require("path");
 
+// ANSI color helpers
+const c = {
+  reset: "\x1b[0m",
+  bold: "\x1b[1m",
+  dim: "\x1b[2m",
+
+  // Foreground
+  white: "\x1b[97m",
+  gray: "\x1b[90m",
+  cyan: "\x1b[96m",
+  green: "\x1b[92m",
+  yellow: "\x1b[93m",
+  orange: "\x1b[33m",
+  red: "\x1b[91m",
+  magenta: "\x1b[95m",
+  blue: "\x1b[94m",
+
+  // Background
+  bgBlack: "\x1b[40m",
+};
+
+function colorForPct(pct) {
+  if (pct < 50) return c.green;
+  if (pct < 75) return c.yellow;
+  if (pct < 90) return c.orange;
+  return c.red;
+}
+
+function miniBar(pct, width = 8) {
+  const filled = Math.round((pct * width) / 100);
+  const color = colorForPct(pct);
+  return (
+    color + "▰".repeat(filled) + c.gray + "▱".repeat(width - filled) + c.reset
+  );
+}
+
+function pctLabel(pct) {
+  const color = colorForPct(pct);
+  const padded = String(pct).padStart(3, " ");
+  return `${color}${c.bold}${padded}%${c.reset}`;
+}
+
 function getRepoLink() {
   try {
     let remote = execSync("git remote get-url origin", {
@@ -11,13 +53,12 @@ function getRepoLink() {
 
     if (!remote) return null;
 
-    remote
+    const url = remote
       .replace(/^git@github\.com:/, "https://github.com/")
       .replace(/\.git$/, "");
 
-    const repoName = path.basename(remote);
-
-    return `\x1b]8;;${remote}\x07${repoName}\x1b]8;;\x07`;
+    const repoName = path.basename(url);
+    return `\x1b]8;;${url}\x07${c.cyan}${repoName}${c.reset}\x1b]8;;\x07`;
   } catch {
     return null;
   }
@@ -27,17 +68,43 @@ let input = "";
 process.stdin.on("data", (chunk) => (input += chunk));
 process.stdin.on("end", () => {
   const data = JSON.parse(input);
-  const model = data.model.display_name;
 
-  // Optional chaining (?.) safely handles null fields
-  const pct = Math.floor(data.context_window?.used_percentage || 0);
+  const model = data.model?.display_name ?? "Claude";
+  const rate_limits = data.rate_limits || {};
 
-  // String.repeat() builds the bar
-  const filled = Math.floor((pct * 10) / 100);
-  const bar = "▓".repeat(filled) + "░".repeat(10 - filled);
+  const ctx_pct = Math.floor(data.context_window?.used_percentage || 0);
+  const session_pct = Math.floor(rate_limits.five_hour?.used_percentage || 0);
+  const week_pct = Math.floor(rate_limits.seven_day?.used_percentage || 0);
 
   const remoteLink = getRepoLink();
-  const remoteDisplay = remoteLink ? `| 🔗 ${remoteLink}` : "";
 
-  console.log(`[${model}] ${bar} ${pct}% ${remoteDisplay}`);
+  // ── Separators ─────────────────────────────────────────────────────────────
+  const sep = `${c.gray} │ ${c.reset}`;
+  const dot = `${c.gray}·${c.reset}`;
+
+  // ── Model badge ────────────────────────────────────────────────────────────
+  const modelBadge = `${c.bold}${c.magenta}◆${c.reset} ${c.bold}${model}${c.reset}`;
+
+  // ── Context window ─────────────────────────────────────────────────────────
+  const ctxSegment =
+    `${c.dim}Context${c.reset} ` + miniBar(ctx_pct) + ` ${pctLabel(ctx_pct)}`;
+
+  // ── 5-hour session ─────────────────────────────────────────────────────────
+  const sessionSegment =
+    `${c.dim}5h${c.reset}  ` +
+    miniBar(session_pct) +
+    ` ${pctLabel(session_pct)}`;
+
+  // ── 7-day week ─────────────────────────────────────────────────────────────
+  const weekSegment =
+    `${c.dim}7d${c.reset}  ` + miniBar(week_pct) + ` ${pctLabel(week_pct)}`;
+
+  // ── Repo link ──────────────────────────────────────────────────────────────
+  const repoSegment = remoteLink ? `${c.gray}⎇${c.reset}  ${remoteLink}` : null;
+
+  // ── Assemble ───────────────────────────────────────────────────────────────
+  const parts = [modelBadge, ctxSegment, sessionSegment, weekSegment];
+  if (repoSegment) parts.push(repoSegment);
+
+  console.log(parts.join(sep));
 });
