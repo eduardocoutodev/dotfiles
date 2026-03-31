@@ -119,7 +119,7 @@ alt-shift-c = 'reload-config'
 alt-c = '''exec-and-forget open -a 'Visual Studio Code' '''
 alt-i = '''exec-and-forget open -a 'IntelliJ IDEA' '''
 alt-s = '''exec-and-forget open -a 'Slack' '''
-alt-t = '''exec-and-forget open -a 'Ghostty' '''
+alt-t = '''exec-and-forget open -a 'Cmux' '''
 alt-b = '''exec-and-forget open -a 'Firefox Developer Edition' || open -a 'Firefox' '''
 alt-o = '''exec-and-forget open -a 'Obsidian' '''
 

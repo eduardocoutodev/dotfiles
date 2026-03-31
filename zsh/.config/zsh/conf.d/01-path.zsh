@@ -33,3 +33,6 @@ export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
 
 # Intellij
 export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
+
+# Claude Code
+export ENABLE_LSP_TOOL=1
