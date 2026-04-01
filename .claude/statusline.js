@@ -7,8 +7,6 @@ const c = {
   reset: "\x1b[0m",
   bold: "\x1b[1m",
   dim: "\x1b[2m",
-
-  // Foreground
   white: "\x1b[97m",
   gray: "\x1b[90m",
   cyan: "\x1b[96m",
@@ -18,8 +16,6 @@ const c = {
   red: "\x1b[91m",
   magenta: "\x1b[95m",
   blue: "\x1b[94m",
-
-  // Background
   bgBlack: "\x1b[40m",
 };
 
@@ -42,6 +38,21 @@ function pctLabel(pct) {
   const color = colorForPct(pct);
   const padded = String(pct).padStart(3, " ");
   return `${color}${c.bold}${padded}%${c.reset}`;
+}
+
+function formatCountdown(resetsAt) {
+  if (!resetsAt) return null;
+  const nowSec = Math.floor(Date.now() / 1000);
+  const diffSec = resetsAt - nowSec;
+  if (diffSec <= 0) return `${c.green}now${c.reset}`;
+
+  const d = Math.floor(diffSec / 86400);
+  const h = Math.floor((diffSec % 86400) / 3600);
+  const m = Math.floor((diffSec % 3600) / 60);
+
+  if (d > 0) return `${c.dim}↺${c.reset} ${c.gray}${d}d${h}h${c.reset}`;
+  if (h > 0) return `${c.dim}↺${c.reset} ${c.gray}${h}h${m}m${c.reset}`;
+  return `${c.dim}↺${c.reset} ${c.yellow}${m}m${c.reset}`;
 }
 
 function getRepoLink() {
@@ -76,33 +87,39 @@ process.stdin.on("end", () => {
   const session_pct = Math.floor(rate_limits.five_hour?.used_percentage || 0);
   const week_pct = Math.floor(rate_limits.seven_day?.used_percentage || 0);
 
+  const session_reset = formatCountdown(rate_limits.five_hour?.resets_at);
+  const week_reset = formatCountdown(rate_limits.seven_day?.resets_at);
+
   const remoteLink = getRepoLink();
 
-  // ── Separators ─────────────────────────────────────────────────────────────
+  // ── Separators ──────────────────────────────────────────────────────────────
   const sep = `${c.gray} │ ${c.reset}`;
-  const dot = `${c.gray}·${c.reset}`;
 
-  // ── Model badge ────────────────────────────────────────────────────────────
+  // ── Model badge ─────────────────────────────────────────────────────────────
   const modelBadge = `${c.bold}${c.magenta}◆${c.reset} ${c.bold}${model}${c.reset}`;
 
-  // ── Context window ─────────────────────────────────────────────────────────
+  // ── Context window ──────────────────────────────────────────────────────────
   const ctxSegment =
     `${c.dim}Context${c.reset} ` + miniBar(ctx_pct) + ` ${pctLabel(ctx_pct)}`;
 
-  // ── 5-hour session ─────────────────────────────────────────────────────────
+  // ── 5-hour session ──────────────────────────────────────────────────────────
   const sessionSegment =
     `${c.dim}5h${c.reset}  ` +
     miniBar(session_pct) +
-    ` ${pctLabel(session_pct)}`;
+    ` ${pctLabel(session_pct)}` +
+    (session_reset ? `  ${session_reset}` : "");
 
-  // ── 7-day week ─────────────────────────────────────────────────────────────
+  // ── 7-day week ──────────────────────────────────────────────────────────────
   const weekSegment =
-    `${c.dim}7d${c.reset}  ` + miniBar(week_pct) + ` ${pctLabel(week_pct)}`;
+    `${c.dim}7d${c.reset}  ` +
+    miniBar(week_pct) +
+    ` ${pctLabel(week_pct)}` +
+    (week_reset ? `  ${week_reset}` : "");
 
-  // ── Repo link ──────────────────────────────────────────────────────────────
+  // ── Repo link ───────────────────────────────────────────────────────────────
   const repoSegment = remoteLink ? `${c.gray}⎇${c.reset}  ${remoteLink}` : null;
 
-  // ── Assemble ───────────────────────────────────────────────────────────────
+  // ── Assemble ────────────────────────────────────────────────────────────────
   const parts = [modelBadge, ctxSegment, sessionSegment, weekSegment];
   if (repoSegment) parts.push(repoSegment);
 
