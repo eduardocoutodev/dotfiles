@@ -10,13 +10,21 @@
     "ralph-loop@claude-plugins-official": true,
     "vtsls@claude-code-lsps": true,
     "jdtls@claude-code-lsps": true,
-    "kotlin-lsp@claude-plugins-official": true
+    "kotlin-lsp@claude-plugins-official": true,
+    "jdtls-lsp@claude-plugins-official": true,
+    "obsidian@obsidian-skills": true
   },
   "extraKnownMarketplaces": {
     "claude-code-lsps": {
       "source": {
         "source": "github",
         "repo": "boostvolt/claude-code-lsps"
+      }
+    },
+    "obsidian-skills": {
+      "source": {
+        "source": "github",
+        "repo": "kepano/obsidian-skills"
       }
     }
   },
