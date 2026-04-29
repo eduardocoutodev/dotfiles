@@ -6,11 +6,12 @@ description: >
   "pick up a ticket", "run Ralph", "start the execution loop", "work on the feature", "build
   this", or after the kanban-generator has produced tickets. Also trigger when the user returns
   to a project and says "continue where we left off", "what's next", or "keep going". Supports
-  two modes: **worktree mode** (default) creates an isolated git worktree per PRD at
-  plan/worktrees/<prd-name>; **branch mode** checks out a feature branch directly in the
-  working directory without creating a worktree. Say "use branch mode" or "run without worktrees"
-  to activate branch mode. Say "run in parallel" to work on multiple PRDs simultaneously (worktree
-  mode only). Committing and merging are always left to the user — Ralph never commits or merges.
+  two modes: **branch mode** (default) checks out a feature branch directly in the working
+  directory without creating a worktree; **worktree mode** creates an isolated git worktree per
+  PRD at plan/worktrees/<prd-name>. Say "use worktree mode" or "run with worktrees" to activate
+  worktree mode. Say "run in parallel" to work on multiple PRDs simultaneously (worktree mode
+  only). **Always stops after each ticket for review** — never runs tickets back-to-back
+  autonomously. Committing and merging are always left to the user — Ralph never commits or merges.
   Changes accumulate unstaged for review in VSCode.
 ---
 
@@ -21,56 +22,33 @@ and leaves changes unstaged for the user to review and commit.
 
 **Two isolation modes — pick one per session:**
 
-|                       | Worktree mode (default)                           | Branch mode                                               |
-| --------------------- | ------------------------------------------------- | --------------------------------------------------------- |
-| **Isolation**         | Separate directory per PRD                        | Checkout in the main working directory                    |
-| **Parallel PRDs**     | ✅ Yes — each PRD gets its own worktree           | ❌ No — only one branch active at a time                  |
-| **VSCode experience** | Both trees visible simultaneously                 | Single directory, switch branches to compare              |
-| **When to use**       | Multiple PRDs in flight, or prefer full isolation | Simpler setup, single PRD focus, or worktrees unsupported |
+|                       | Branch mode (default)                                     | Worktree mode                                     |
+| --------------------- | --------------------------------------------------------- | ------------------------------------------------- |
+| **Isolation**         | Checkout in the main working directory                    | Separate directory per PRD                        |
+| **Parallel PRDs**     | ❌ No — only one branch active at a time                  | ✅ Yes — each PRD gets its own worktree           |
+| **VSCode experience** | Single directory, switch branches to compare              | Both trees visible simultaneously                 |
+| **When to use**       | Default for single-PRD focus and normal IDE/git workflow  | Multiple PRDs in flight, or prefer full isolation |
 
 Mode is chosen **once per session** and applies to all tickets in that run. If `plan/tickets.json`
-already records a worktree, that implies worktree mode was used before — default to it unless the
-user says otherwise.
+already records a worktree, that implies worktree mode was used before — resume in worktree mode.
+Otherwise default to **branch mode**.
 
 **Ralph never commits, never merges.** Both are the user's responsibility. Ralph writes code,
 runs tests, and stops with changes unstaged — ready to inspect in VSCode before deciding to keep
 anything.
 
----
-
-## Mode: Worktree
-
-One isolated checkout per PRD, placed inside the project directory.
-
-**Convention:**
-
-- Path: `plan/worktrees/<prd-slug>`
-- Branch: `feat/<prd-slug>` (or `fix/`, `chore/` as appropriate)
-
-`plan/worktrees/` must be added to `.gitignore` so worktree checkouts are never accidentally
-staged in the main tree.
-
-**Examples:**
-
-| PRD / Feature                | Worktree path                          | Branch                        |
-| ---------------------------- | -------------------------------------- | ----------------------------- |
-| Order Management             | `plan/worktrees/order-management`      | `feat/order-management`       |
-| Authentication & Permissions | `plan/worktrees/auth`                  | `feat/auth`                   |
-| KDS Integration              | `plan/worktrees/kds-integration`       | `feat/kds-integration`        |
-| Menu Item Schema Migration   | `plan/worktrees/menu-schema-migration` | `chore/menu-schema-migration` |
-
-The slug comes from the PRD title or the feature name, not from any ticket. Keep it short
-and stable — it won't change as tickets are added or completed.
-
-The worktree path and branch are stored in `plan/tickets.json` at the PRD level (`meta.worktree`,
-`meta.branch`) — not per ticket, since all tickets share them.
+**Ralph always stops after each ticket.** Never run tickets back-to-back without an explicit
+"continue" / "next ticket" / "keep going" from the user. After every ticket: hand off, surface
+the diff, and wait. The user reviews each diff before the next ticket starts — small reviews
+compound, big PRs don't get reviewed.
 
 ---
 
-## Mode: Branch
+## Mode: Branch (default)
 
 No worktree is created. Ralph checks out the feature branch directly in the main working
-directory and all file operations happen there.
+directory and all file operations happen there. This is the default — only switch to worktree
+mode when the user explicitly asks for it or when `tickets.json` already records a worktree.
 
 **Convention:**
 
@@ -94,6 +72,27 @@ git checkout -b feat/order-management   # or git checkout feat/... if branch alr
 
 The branch is stored in `plan/tickets.json` at the PRD level (`meta.branch`). `meta.worktree`
 is omitted in branch mode.
+
+---
+
+## Mode: Worktree
+
+One isolated checkout per PRD, placed inside the project directory. Use only when the user
+explicitly asks for worktree mode or when resuming a session that already created one.
+
+**Convention:**
+
+- Path: `plan/worktrees/<prd-slug>`
+- Branch: `feat/<prd-slug>` (or `fix/`, `chore/` as appropriate)
+
+`plan/worktrees/` must be added to `.gitignore` so worktree checkouts are never accidentally
+staged in the main tree.
+
+The slug comes from the PRD title or the feature name, not from any ticket. Keep it short
+and stable — it won't change as tickets are added or completed.
+
+The worktree path and branch are stored in `plan/tickets.json` at the PRD level
+(`meta.worktree`, `meta.branch`) — not per ticket, since all tickets share them.
 
 ---
 
@@ -124,19 +123,12 @@ stop and tell the user to run the **kanban-generator** skill first.
 
 **Determine the isolation mode:**
 
-1. If the user explicitly said "branch mode" / "no worktrees" → **branch mode**.
+1. If the user explicitly said "worktree mode" / "use worktrees" → **worktree mode**.
 2. If `plan/tickets.json` has `meta.worktree` set → **worktree mode** (resuming).
-3. If `plan/tickets.json` has `meta.branch` but no `meta.worktree` → **branch mode** (resuming).
-4. Otherwise → ask the user which mode to use before proceeding.
+3. Otherwise → **branch mode** (default). No prompt needed; just confirm the choice in the handoff.
 
-```
-Which isolation mode would you like?
-
-  [1] Worktree mode (default) — isolated checkout at plan/worktrees/<prd-slug>
-                                 supports parallel PRDs, both trees visible in VSCode
-  [2] Branch mode             — checkout directly in your working directory
-                                 simpler setup, one PRD at a time
-```
+Only fall back to asking the user if branch mode setup hits a blocker (e.g. dirty working tree
+that can't be safely stashed).
 
 **Check for existing state:**
 
@@ -408,6 +400,9 @@ Ready to pick it up?
 6. **Never merge.** The user owns both the commit and merge steps.
 7. **Never create more than one worktree per PRD.**
 8. **Never switch branches in branch mode without checking for dirty state first.**
+9. **Never start the next ticket without explicit user confirmation.** After each ticket, hand
+   off, surface the diff, and wait. The user reviews each diff before saying "next" / "continue"
+   / "keep going". No back-to-back ticket execution under any circumstances.
 
 ## Important Boundaries
 
