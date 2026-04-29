@@ -55,12 +55,6 @@ improve-codebase-architecture → execution-loop
 
 The grilling loop is built into `improve-codebase-architecture` now — no separate `grill-me` step. Pick a candidate, walk the design tree inside the skill, hand the resulting GitHub issue (or `tickets.json`) to `execution-loop`.
 
-## Dropped / consolidated skills
-
-- **`feature-planner`** — already backed up to `SKILL.MD.bk`. Keep it parked.
-- **`grill-me` standalone** — mostly redundant. `prd-writer` grills for product, `improve-codebase-architecture` grills for architecture. Keep `grill-me` only for design conversations that aren't either.
-- **`arch-simplifier` vs `improve-codebase-architecture`** — overlap. `improve-codebase-architecture` is the more rigorous skill (with `LANGUAGE.md` / `DEEPENING.md` / `INTERFACE-DESIGN.md` backing it). Drop or repurpose `arch-simplifier` for "scan only, no proposal" mode.
-
 ## Skill index
 
 | Skill                           | Role in the flow                                                                  | Status |

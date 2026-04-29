@@ -44,6 +44,8 @@ Then use the Agent tool with `subagent_type=Explore` to walk the codebase. Don't
 
 Apply the **deletion test** to anything you suspect is shallow: would deleting it concentrate complexity, or just move it? A "yes, concentrates" is the signal you want.
 
+If the codebase matches a stack in references/, load that stack lens for concrete smells and canonical patterns.
+
 ### 2. Present candidates
 
 Present a numbered list of deepening opportunities. For each candidate:
