@@ -65,6 +65,14 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
+## 5. Library Source Code
+
+**Always read source. Never reverse-engineer compiled artifacts.**
+
+When you need to inspect a library — checking capabilities, understanding behavior, debugging, or exploring internals — use the `fetch-source` skill. Never examine compiled artifacts directly (JARs, `.class` files, minified bundles, decompiled output).
+
+Source code is the source of truth. `fetch-source` works for both open-source packages and internal libraries via GitHub.
+
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
