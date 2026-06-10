@@ -1,4 +1,5 @@
 {
+  "model": "claude-fable-5[1m]",
   "statusLine": {
     "type": "command",
     "command": "node ~/.claude/statusline.js"
@@ -28,6 +29,6 @@
       }
     }
   },
-  "effortLevel": "medium",
+  "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true
 }

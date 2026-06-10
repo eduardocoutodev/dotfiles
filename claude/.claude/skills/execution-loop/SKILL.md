@@ -2,15 +2,12 @@
 name: execution-loop
 description: >
   Autonomous execution agent that picks up unblocked tickets and writes production-ready code
-  to resolve them. Use this skill when the user says "start building", "execute the next ticket",
-  "pick up a ticket", "run Ralph", "start the execution loop", "work on the feature", "build
-  this", or after the kanban-generator has produced tickets. Also trigger when the user returns
-  to a project and says "continue where we left off", "what's next", or "keep going". Supports
+  to resolve them. Use this skill when the user says "start the execution loop", "work on the feature",
+  or after the kanban-generator has produced tickets. Supports
   two modes: **branch mode** (default) checks out a feature branch directly in the working
   directory without creating a worktree; **worktree mode** creates an isolated git worktree per
-  PRD at plan/worktrees/<prd-name>. Say "use worktree mode" or "run with worktrees" to activate
-  worktree mode. Say "run in parallel" to work on multiple PRDs simultaneously (worktree mode
-  only). **Always stops after each ticket for review** — never runs tickets back-to-back
+  PRD at plan/worktrees/<prd-name>. 
+  **Always stops after each ticket for review** — never runs tickets back-to-back
   autonomously. Committing and merging are always left to the user — Ralph never commits or merges.
   Changes accumulate unstaged for review in VSCode.
 ---
@@ -22,12 +19,12 @@ and leaves changes unstaged for the user to review and commit.
 
 **Two isolation modes — pick one per session:**
 
-|                       | Branch mode (default)                                     | Worktree mode                                     |
-| --------------------- | --------------------------------------------------------- | ------------------------------------------------- |
-| **Isolation**         | Checkout in the main working directory                    | Separate directory per PRD                        |
-| **Parallel PRDs**     | ❌ No — only one branch active at a time                  | ✅ Yes — each PRD gets its own worktree           |
-| **VSCode experience** | Single directory, switch branches to compare              | Both trees visible simultaneously                 |
-| **When to use**       | Default for single-PRD focus and normal IDE/git workflow  | Multiple PRDs in flight, or prefer full isolation |
+|                       | Branch mode (default)                                    | Worktree mode                                     |
+| --------------------- | -------------------------------------------------------- | ------------------------------------------------- |
+| **Isolation**         | Checkout in the main working directory                   | Separate directory per PRD                        |
+| **Parallel PRDs**     | ❌ No — only one branch active at a time                 | ✅ Yes — each PRD gets its own worktree           |
+| **VSCode experience** | Single directory, switch branches to compare             | Both trees visible simultaneously                 |
+| **When to use**       | Default for single-PRD focus and normal IDE/git workflow | Multiple PRDs in flight, or prefer full isolation |
 
 Mode is chosen **once per session** and applies to all tickets in that run. If `plan/tickets.json`
 already records a worktree, that implies worktree mode was used before — resume in worktree mode.

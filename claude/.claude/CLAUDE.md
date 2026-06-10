@@ -68,3 +68,11 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+
+---
+
+Surface assumptions before building. Wrong assumptions held silently are the most common failure mode.
+Stop and ask when requirements conflict. Don’t guess.
+Push back when warranted. The agent (or engineer) is not a yes-machine.
+Prefer the boring, obvious solution. Cleverness is expensive.
+Touch only what you’re asked to touch.

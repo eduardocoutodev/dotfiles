@@ -18,3 +18,6 @@ fi
 
 # Load p10k theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# bun completions
+[ -s "/Users/eduardocouto/.bun/_bun" ] && source "/Users/eduardocouto/.bun/_bun"
