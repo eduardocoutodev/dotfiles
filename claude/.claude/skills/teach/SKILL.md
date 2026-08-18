@@ -1,7 +1,6 @@
 ---
 name: teach
 description: Teach the user a new skill or concept, within this workspace.
-disable-model-invocation: true
 argument-hint: "What would you like to learn about?"
 ---
 
@@ -40,6 +39,32 @@ The lesson should teach ONE THING only. It should be completable very quickly - 
 
 Make opening a lesson as easy as possible — ideally a single CLI command the user can run to open the HTML file in their browser.
 
+### Visual-First Teaching
+
+The user learns better with visual aids than with terminal-shaped exposition. Design lessons as browser-native visual explanations first; use terminal output only as supporting evidence or setup detail.
+
+Every lesson should include at least one meaningful visual aid unless the topic truly cannot benefit from one. Prefer visuals that make the concept easier to reason about, such as:
+
+- Flowcharts for decision processes, debugging paths, lifecycle sequences, and algorithms
+- Timelines for event ordering, concurrency, retries, transactions, and distributed systems behavior
+- Layered diagrams for architecture, protocols, frameworks, call stacks, memory, and data flow
+- Tables, matrices, and annotated comparisons when the learner needs to classify or choose between options
+- Interactive widgets, sliders, toggles, quizzes, or small simulations when manipulating the concept makes it clearer
+- Annotated code panes that connect each important line to a diagram, state transition, or runtime effect
+
+The first screen of a lesson should quickly orient the learner with a visual mental model, not a wall of prose. Introduce the concept with a compact diagram, map, or interactive miniature, then teach the details around it.
+
+When creating HTML lessons, prefer self-contained visual implementations using semantic HTML, CSS, inline SVG, and lightweight JavaScript. Do not rely on plain text descriptions where a simple diagram, timeline, state machine, or side-by-side visual comparison would carry the idea better.
+
+Visuals must be explanatory rather than decorative. Avoid generic gradients, ornamental shapes, stock imagery, and large visual treatments that do not directly teach the lesson's one thing.
+
+Before finishing a lesson, inspect it as a visual artifact:
+
+- Does the learner get a useful mental picture within the first viewport?
+- Is every major explanation connected to a visual, example, or interaction?
+- Can the learner practice and receive feedback without leaving the browser whenever possible?
+- Does the layout work on both desktop and narrow screens without text collisions or hidden controls?
+
 ## The Mission
 
 Every lesson should be tied into the mission - the reason that the user is interested in learning about the topic.
@@ -73,6 +98,8 @@ Each lesson should contain a reminder to ask followup questions to the agent. Th
 Skills should be taught through interactive lessons. There are several tools at your disposal:
 
 - Interactive lessons, using quizzes and light in-browser tasks
+- Visual drills where the learner predicts what changes in a diagram, timeline, table, or state machine before revealing the answer
+- Small simulations that let the learner change inputs and immediately see the effect
 - Lessons which guide the user through a list of real-world steps to take (for instance, yoga poses)
 - In-agent quizzes, where you ask the user scenario-based questions about what they've learned
 
@@ -93,6 +120,8 @@ You should attempt to find high-reputation communities the user can join. If the
 While creating lessons, you should also create reference documents. Lessons can reference these documents - they are useful for tracking raw units of knowledge useful across lessons.
 
 Lessons will rarely be revisited later - reference documents will be. They should be the compressed essence of the lesson, in a format designed for quick reference.
+
+Reference documents should also be visual-first. Whenever useful, include compact diagrams, flowcharts, state tables, decision trees, lifecycle maps, or annotated examples so the user can reconstruct the concept at a glance.
 
 Some learning topics lend themselves to reference:
 
