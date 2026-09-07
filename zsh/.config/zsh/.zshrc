@@ -18,3 +18,5 @@ fi
 
 # Load p10k theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+. "$HOME/.local/share/../bin/env"

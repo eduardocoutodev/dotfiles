@@ -63,12 +63,11 @@ shell-integration-features = cursor,sudo,title
 # ──────────────────────────────────────────────
 # macOS
 # ──────────────────────────────────────────────
-macos-option-as-alt = true
+macos-option-as-alt = false
 
 # ──────────────────────────────────────────────
 # Scrollback & mouse
 # ──────────────────────────────────────────────
-scrollback-limit = 10000
 mouse-hide-while-typing = true
 
 # ──────────────────────────────────────────────

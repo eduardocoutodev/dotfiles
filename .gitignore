@@ -7,3 +7,15 @@ scripts/private
 !**/zsh/local/**/.gitkeep
 
 .DS_Store
+
+.claude/backups/*
+.claude/cache/*
+.claude/debug/*
+.claude/file-history/*
+.claude/paste-cache/*
+.claude/plugins/*
+.claude/sessions/*
+.claude/shell-snapshots/*
+.claude/projects/*
+.claude/tasks/*
+.claude/telemetry/*

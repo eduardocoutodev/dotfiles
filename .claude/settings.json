@@ -1,4 +1,5 @@
 {
+  "model": "opus[1m]",
   "statusLine": {
     "type": "command",
     "command": "node ~/.claude/statusline.js"
@@ -28,6 +29,11 @@
       }
     }
   },
-  "effortLevel": "medium",
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "medium"
+    }
+  },
   "skipDangerousModePermissionPrompt": true
 }

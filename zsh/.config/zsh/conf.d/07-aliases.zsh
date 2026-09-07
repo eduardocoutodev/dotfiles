@@ -13,6 +13,7 @@ alias ae='vim $ZDOTDIR/conf.d/07-aliases.zsh'
 alias a='cat $ZDOTDIR/conf.d/07-aliases.zsh'
 
 # Git
+alias g='lazygit'
 alias gap='git add -p'
 alias gpo='git push origin $(git symbolic-ref --short HEAD)'
 alias gsr='git reset --soft HEAD~1'
