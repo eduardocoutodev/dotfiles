@@ -20,3 +20,5 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 . "$HOME/.local/share/../bin/env"
+# bun completions
+[ -s "/Users/eduardocouto/.bun/_bun" ] && source "/Users/eduardocouto/.bun/_bun"
