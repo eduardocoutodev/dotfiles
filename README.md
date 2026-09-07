@@ -80,11 +80,13 @@ brew install --cask sf-symbols
 brew install --cask nikitabobko/tap/aerospace
 ```
 
-### 13. Start Sketchybar
+### 13. Start Sketchybar (disabled for now)
 
+<!-- Re-enable when SketchyBar is wanted:
 ```sh
 brew services start sketchybar
 ```
+-->
 
 ### 12. Install neo vim
 

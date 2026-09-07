@@ -9,14 +9,14 @@ on-focus-changed = ['move-mouse window-lazy-center']
 
 after-startup-command = [
   'exec-and-forget borders',
-  'exec-and-forget sketchybar',
+  # 'exec-and-forget sketchybar',
 ]
 
-exec-on-workspace-change = [
-  '/bin/bash',
-  '-c',
-  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
-]
+# exec-on-workspace-change = [
+#   '/bin/bash',
+#   '-c',
+#   'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+# ]
 
 [workspace-to-monitor-force-assignment]
     1 = '^built-in retina display$'                           # Monitor sequence number from left to right. 1-based indexing
@@ -129,23 +129,23 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 # Modes
 
 alt-esc = [
-  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  # 'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode passthrough',
 ]
 alt-r = [
-  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  # 'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode resize',
 ]
 
 [mode.passthrough.binding]
 
 alt-esc = [
-  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  # 'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode main',
 ] # Alt Esc so I can do operations with opt (for example do @ with alt + 2 or [ with opt and 8)
 
 esc = [
-  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  # 'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode main',
 ]
 
@@ -156,39 +156,39 @@ down = 'resize height -50'
 right = 'resize width +50'
 
 enter = [
-  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  # 'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode main',
 ]
 esc = [
-  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  # 'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'reload-config',
   'mode main',
 ]
 alt-esc = [
-  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  # 'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'reload-config',
   'mode main',
 ]
 r = [
   'flatten-workspace-tree',
-  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  # 'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode main',
 ] # reset layout
 f = [
   'layout floating tiling',
-  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  # 'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode main',
 ] # Toggle between floating and tiling layout
 backspace = [
   'close-all-windows-but-current',
-  'exec-and-forget sketchybar --trigger aerospace_mode_update',
+  # 'exec-and-forget sketchybar --trigger aerospace_mode_update',
   'mode main',
 ]
 
 [gaps]
-inner.horizontal = 20
-inner.vertical = 20
-outer.left = 20
-outer.bottom = 20
-outer.top = 50
-outer.right = 20      # More space for sketchy-bar
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 10
+outer.bottom = 10
+outer.top = 10
+outer.right = 10
